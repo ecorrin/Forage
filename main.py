@@ -47,7 +47,7 @@ for cords, name in zip(geolocations, plant_names):
 # fit bounds function automatic zoom in
 south_west_corner = min(geolocations)
 north_east_corner = max(geolocations)
-m_name.fit_bounds([south_west_corner, north_east_corner])
+m.fit_bounds([south_west_corner, north_east_corner])
 # end fit bounds code
 
 # save and run
