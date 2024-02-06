@@ -5046,13 +5046,7 @@ for cords in geolocations:
     folium.Marker(location=[cords[0], cords[1]]).add_to(m)
 # end of marker creation
 
-# create new list of plant names that match the geolocations
-plant_names = [
 
-    "Wild chives",
-    "Magpie mushroom"
-]
-# end of list
 
 # add display info – note, for testing leave in the Lat and Long pop up display but strip out in final version
 for cords, name, latname, seas, poison in zip(geolocations, plant_names, latin_names, seasons, poisonous):
