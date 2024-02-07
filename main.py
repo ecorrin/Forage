@@ -5053,9 +5053,9 @@ for cords, name, latname, seas, poison in zip(geolocations, plant_names, latin_n
     folium.Marker(location=[cords[0], cords[1]],
                   popup=f"Latitude:<br>{cords[0]}<br>"
                         f"Longitude:<br>{cords[1]}<br>"
-                        f"Common Name:<br>{name}"
-                        f"Latin Name:<br>{latname}"
-                        f"Seasons:<br>{seas}"
+                        f"Common Name:<br>{name}<br>"
+                        f"Latin Name:<br>{latname}<br>"
+                        f"Seasons:<br>{seas}<br>"
                         f"Any poisonous lookalikes:<br>{poison}"
                   ).add_to(m)
 # end display code
