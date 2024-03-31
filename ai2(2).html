@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time User Location</title>
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 400px;"></div>
+    <button onclick="showLocation()">Get My Location</button> <!-- Added button -->
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([0, 0], 13);
+        // Add a tile layer (you can use any other tile provider)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        let userMarker; // To store the user's marker
+
+        // Function to update the user's position
+        function onLocationFound(e) {
+            const radius = e.accuracy / 2;
+            if (!userMarker) {
+                // Create a new marker if it doesn't exist
+                userMarker = L.marker(e.latlng).addTo(map);
+            } else {
+                // Update the existing marker's position
+                userMarker.setLatLng(e.latlng);
+            }
+
+            // Show latitude and longitude in a message box
+            alert(`Your current location:\nLatitude: ${e.latlng.lat.toFixed(6)}\nLongitude: ${e.latlng.lng.toFixed(6)}`);
+        }
+
+        // Listen for location updates
+        map.on('locationfound', onLocationFound);
+
+        // Handle location errors
+        map.on('locationerror', (error) => {
+            if (userMarker) {
+                map.removeLayer(userMarker);
+                userMarker = undefined;
+            }
+            console.error('Error getting location:', error.message);
+        });
+
+        // Start tracking the user's location
+        map.locate({ setView: true, maxZoom: 16 });
+
+        // Function to show location when button is clicked
+        function showLocation() {
+            map.locate();
+        }
+    </script>
+</body>
+</html>
